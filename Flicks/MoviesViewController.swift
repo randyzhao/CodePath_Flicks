@@ -25,6 +25,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         
         networkRequest()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refershControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    
+    func refershControlAction(refreshControl: UIRefreshControl) {
+        NetworkHelper.fetchMovies(
+            NetworkHelper.getRequestByEndpoint(endPoint),
+            successHandler: {
+                (movies: [NSDictionary]) -> Void in
+                self.movies = movies
+                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+            },
+            failureHandler: {
+                (_: NSError?) -> Void in
+            }
+        )
     }
     
     func networkRequest() {
@@ -39,7 +58,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 self.tableView.reloadData()
             },
             failureHandler: {
-                (error: NSError?) -> Void in
+                (_: NSError?) -> Void in
                 EZLoadingActivity.hide(success: false, animated: true)
             }
         )

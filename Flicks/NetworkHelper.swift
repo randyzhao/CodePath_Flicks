@@ -11,7 +11,7 @@ import Foundation
 class NetworkHelper {
     class func getRequestByEndpoint(endPoint: String) -> NSURLRequest {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)&language=\(NSLocale.preferredLanguages()[0])")
         return NSURLRequest(
             URL: url!,
             cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,

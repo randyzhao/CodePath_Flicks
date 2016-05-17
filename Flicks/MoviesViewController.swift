@@ -108,8 +108,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
         let movie = moviesToUse()[indexPath.row]
-        cell.titleLabel.text = movie["title"] as! String
-        cell.overviewLabel.text = movie["overview"] as! String
+        cell.titleLabel.text = movie["title"] as? String
+        cell.overviewLabel.text = movie["overview"] as? String
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         

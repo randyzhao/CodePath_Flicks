@@ -39,9 +39,14 @@ class DetailViewController: UIViewController {
             fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
         }
         
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("imageTapped:")))
         // Do any additional setup after loading the view.
     }
 
+    func imageTapped(sender: UITapGestureRecognizer) {
+        print("tapped")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

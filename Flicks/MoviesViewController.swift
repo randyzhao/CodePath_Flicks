@@ -29,32 +29,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func networkRequest() {
         EZLoadingActivity.show("Loading...", disableUI: true)
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)")
-        let request = NSURLRequest(
-            URL: url!,
-            cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
-            timeoutInterval: 10)
-        
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue()
+        let request = NetworkHelper.getRequestByEndpoint(endPoint)
+        NetworkHelper.fetchMovies(
+            request,
+            successHandler: {
+                (movies: [NSDictionary]) -> Void in
+                self.movies = movies
+                EZLoadingActivity.hide()
+                self.tableView.reloadData()
+            },
+            failureHandler: {
+                (error: NSError?) -> Void in
+                EZLoadingActivity.hide(success: false, animated: true)
+            }
         )
-        
-        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            
-                            self.movies = responseDictionary["results"] as! [NSDictionary]
-                            EZLoadingActivity.hide()
-                            self.tableView.reloadData()
-                    }
-                }
-        })
-        task.resume()
     }
 
     override func didReceiveMemoryWarning() {

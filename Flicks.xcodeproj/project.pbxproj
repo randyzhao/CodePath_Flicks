@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A498ADC01CEA8D9500B33470 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498ADBF1CEA8D9500B33470 /* DetailViewController.swift */; };
+		A498ADC31CEB8BFF00B33470 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498ADC21CEB8BFF00B33470 /* NetworkHelper.swift */; };
 		A4ED468C1CEA72A200C0DD95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED468B1CEA72A200C0DD95 /* AppDelegate.swift */; };
 		A4ED46911CEA72A200C0DD95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ED468F1CEA72A200C0DD95 /* Main.storyboard */; };
 		A4ED46931CEA72A200C0DD95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4ED46921CEA72A200C0DD95 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		558626F9FAA9B2745DA3E042 /* Pods-Flicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.release.xcconfig"; sourceTree = "<group>"; };
 		9F6F715205739B91ABDDAEF3 /* Pods-Flicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.debug.xcconfig"; sourceTree = "<group>"; };
 		A498ADBF1CEA8D9500B33470 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A498ADC21CEB8BFF00B33470 /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		A4ED46881CEA72A200C0DD95 /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4ED468B1CEA72A200C0DD95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4ED46901CEA72A200C0DD95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A498ADC11CEB8BDE00B33470 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A498ADC21CEB8BFF00B33470 /* NetworkHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		A4ED467F1CEA72A200C0DD95 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +84,7 @@
 		A4ED468A1CEA72A200C0DD95 /* Flicks */ = {
 			isa = PBXGroup;
 			children = (
+				A498ADC11CEB8BDE00B33470 /* Helpers */,
 				A4ED46A21CEA79E800C0DD95 /* ViewController */,
 				A4ED469F1CEA79BB00C0DD95 /* Views */,
 				A4ED468B1CEA72A200C0DD95 /* AppDelegate.swift */,
@@ -234,6 +245,7 @@
 			files = (
 				A4ED468C1CEA72A200C0DD95 /* AppDelegate.swift in Sources */,
 				A4ED469E1CEA735A00C0DD95 /* MoviesViewController.swift in Sources */,
+				A498ADC31CEB8BFF00B33470 /* NetworkHelper.swift in Sources */,
 				A4ED46A11CEA79DD00C0DD95 /* MovieCell.swift in Sources */,
 				A498ADC01CEA8D9500B33470 /* DetailViewController.swift in Sources */,
 			);

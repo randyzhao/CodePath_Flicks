@@ -10,13 +10,15 @@ import UIKit
 import AFNetworking
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var movies: [NSDictionary]?
+    var movies = [NSDictionary]()
+    var filteredMovies = [NSDictionary]()
     var endPoint: String!
     
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refershControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterMoviesForSearchText(searchController.searchBar.text!)
+    }
+    
+    func filterMoviesForSearchText(searchText: String, scope: String = "All") {
+        filteredMovies = movies.filter {
+            movie in
+            return movie["title"]!.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        tableView.reloadData()
     }
     
     func refershControlAction(refreshControl: UIRefreshControl) {
@@ -70,10 +90,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let movies = movies {
-            return movies.count
+        return moviesToUse().count
+    }
+    
+    private func moviesToUse() -> [NSDictionary] {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredMovies
         } else {
-            return 0
+            return movies
         }
     }
     
@@ -83,7 +107,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
-        let movie = movies![indexPath.row]
+        let movie = moviesToUse()[indexPath.row]
         cell.titleLabel.text = movie["title"] as! String
         cell.overviewLabel.text = movie["overview"] as! String
         
@@ -99,7 +123,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPathForCell(cell)
-        let movie = movies![indexPath!.row]
+        let movie = moviesToUse()[indexPath!.row]
         
         let detailViewController = segue.destinationViewController as! DetailViewController
         detailViewController.movie = movie

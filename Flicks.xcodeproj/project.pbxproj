@@ -75,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				A4ED46A21CEA79E800C0DD95 /* ViewController */,
-				A4ED469D1CEA735A00C0DD95 /* MoviesViewController.swift */,
 				A4ED469F1CEA79BB00C0DD95 /* Views */,
 				A4ED468B1CEA72A200C0DD95 /* AppDelegate.swift */,
 				A4ED468F1CEA72A200C0DD95 /* Main.storyboard */,
@@ -97,6 +96,7 @@
 		A4ED46A21CEA79E800C0DD95 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED469D1CEA735A00C0DD95 /* MoviesViewController.swift */,
 				A498ADBF1CEA8D9500B33470 /* DetailViewController.swift */,
 			);
 			name = ViewController;

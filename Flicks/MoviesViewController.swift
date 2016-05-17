@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import EZLoadingActivity
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -27,6 +28,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func networkRequest() {
+        EZLoadingActivity.show("Loading...", disableUI: true)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)")
         let request = NSURLRequest(
@@ -47,6 +49,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             
                             self.movies = responseDictionary["results"] as! [NSDictionary]
+                            EZLoadingActivity.hide()
                             self.tableView.reloadData()
                     }
                 }

@@ -38,8 +38,7 @@ class DetailViewController: UIViewController {
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
         if let posterPath = movie["poster_path"] as? String {
-            let imageUrl = NSURL(string: baseUrl + posterPath)
-            posterImageView.setImageWithURL(imageUrl!)
+            fetchImageAndFadeIn(posterImageView, imageUrl: baseUrl + posterPath)
         }
         
         // Do any additional setup after loading the view.

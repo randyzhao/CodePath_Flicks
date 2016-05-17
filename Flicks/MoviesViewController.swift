@@ -110,12 +110,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let movie = moviesToUse()[indexPath.row]
         cell.titleLabel.text = movie["title"] as? String
         cell.overviewLabel.text = movie["overview"] as? String
-        
-        let baseUrl = "http://image.tmdb.org/t/p/w500"
+    
         
         if let posterPath = movie["poster_path"] as? String {
             // cell.posterView.setImageWithURL(imageUrl!)
-            fetchImageAndFadeIn(cell.posterView, imageUrl: baseUrl + posterPath)
+            fetchImageAndFadeIn(cell.posterView, imageUrl: largePosterUrl(posterPath))
         }
         return cell
     }

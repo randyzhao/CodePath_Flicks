@@ -35,10 +35,8 @@ class DetailViewController: UIViewController {
         
         overviewLabel.sizeToFit()
         
-        let baseUrl = "http://image.tmdb.org/t/p/w500"
-        
         if let posterPath = movie["poster_path"] as? String {
-            fetchImageAndFadeIn(posterImageView, imageUrl: baseUrl + posterPath)
+            fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
         }
         
         // Do any additional setup after loading the view.

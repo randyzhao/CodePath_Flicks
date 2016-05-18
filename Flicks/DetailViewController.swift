@@ -24,6 +24,10 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var posterImageView: UIImageView!
     
+    @IBOutlet weak var voteAverageLabel: UILabel!
+    
+    @IBOutlet weak var voteCountLabel: UILabel!
+    
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
             let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
@@ -76,6 +80,9 @@ class DetailViewController: UIViewController {
             },
             failureHandler: { (error: NSError?) -> Void in }// TODO: add an error handler here
         )
+        
+        voteAverageLabel.text = "\(movie["vote_average"]!)/10"
+        voteCountLabel.text = String(movie["vote_count"]! )
         
         print(movie)
     }

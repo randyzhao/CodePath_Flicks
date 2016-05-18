@@ -95,7 +95,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VQq-pY-vQj">
                                                 <rect key="frame" x="11" y="7" width="297" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -131,6 +131,31 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
+                                    <view contentMode="scaleToFill" id="EfR-hs-zM6">
+                                        <rect key="frame" x="0.0" y="501" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" id="s1v-xO-NOr">
+                                                <rect key="frame" x="7" y="23" width="20" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vote_avg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Yo-Jm-8ek">
+                                                <rect key="frame" x="30" y="14" width="67" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K29-5F-tIH">
+                                                <rect key="frame" x="31" y="32" width="44" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90404040404040398" green="0.90404040404040398" blue="0.90404040404040398" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -146,6 +171,8 @@
                         <outlet property="scrollView" destination="3zl-kZ-V27" id="pJD-Un-Weg"/>
                         <outlet property="titleLabel" destination="VQq-pY-vQj" id="403-jb-vip"/>
                         <outlet property="trailerWebView" destination="5UK-jL-FJv" id="kry-1r-vZv"/>
+                        <outlet property="voteAverageLabel" destination="5Yo-Jm-8ek" id="iMT-Ha-FSU"/>
+                        <outlet property="voteCountLabel" destination="K29-5F-tIH" id="Ebt-6w-0sN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwC-RW-OVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -171,4 +198,7 @@
             <point key="canvasLocation" x="365" y="598"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="star" width="16" height="16"/>
+    </resources>
 </document>

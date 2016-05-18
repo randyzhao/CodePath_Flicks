@@ -38,8 +38,10 @@ class DetailViewController: UIViewController {
         
         overviewLabel.sizeToFit()
         
-        if let posterPath = movie["poster_path"] as? String {
-            fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
+        //if let posterPath = movie["poster_path"] as? String {
+        if let backdropPath = movie["backdrop_path"] as? String {
+            //fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
+            fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(backdropPath))
         }
         trailerWebView.allowsInlineMediaPlayback = true
         trailerWebView.mediaPlaybackRequiresUserAction = false

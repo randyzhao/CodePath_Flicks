@@ -20,6 +20,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var infoView: UIView!
     
+    @IBOutlet weak var trailerWebView: UIWebView!
+    
     var movie: NSDictionary!
     
     
@@ -27,6 +29,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
+
         let title = movie["title"] as? String
         titleLabel.text = title
         
@@ -38,14 +41,27 @@ class DetailViewController: UIViewController {
         if let posterPath = movie["poster_path"] as? String {
             fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
         }
+        trailerWebView.allowsInlineMediaPlayback = true
+        trailerWebView.mediaPlaybackRequiresUserAction = false
         
-        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("imageTapped:")))
-        // Do any additional setup after loading the view.
+        
+        trailerWebView.allowsInlineMediaPlayback = true
+        trailerWebView.hidden = true
+        NetworkHelper.fetchYoutubeLinks(
+            String(self.movie["id"]!),
+            successHandler: { (links: [String]) -> Void in
+                if links.count > 0 { // TODO: only play first trailer now
+                    let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(links[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
+                    self.trailerWebView.hidden = false
+                    self.trailerWebView.loadHTMLString(code, baseURL: NSBundle.mainBundle().bundleURL)
+                }
+                
+            },
+            failureHandler: { (error: NSError?) -> Void in }// TODO: add an error handler here
+        )
+        print(movie)
     }
 
-    func imageTapped(sender: UITapGestureRecognizer) {
-        print("tapped")
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

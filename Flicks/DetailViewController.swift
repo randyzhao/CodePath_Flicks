@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var dropbackImageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -22,8 +22,19 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var trailerWebView: UIWebView!
     
+    @IBOutlet weak var posterImageView: UIImageView!
+    
+    @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
+        if trailerLinks.count > 0 {
+            let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
+            self.trailerWebView.hidden = false
+            self.trailerWebView.loadHTMLString(code, baseURL: NSBundle.mainBundle().bundleURL)
+        }
+
+    }
     var movie: NSDictionary!
     
+    var trailerLinks: Array<String> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +47,15 @@ class DetailViewController: UIViewController {
         let overview = movie["overview"]
         overviewLabel.text = overview as? String
         
-        overviewLabel.sizeToFit()
+        //overviewLabel.sizeToFit()
         
         //if let posterPath = movie["poster_path"] as? String {
         if let backdropPath = movie["backdrop_path"] as? String {
             //fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
-            fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(backdropPath))
+            fetchImageAndFadeIn(dropbackImageView, imageUrl: largePosterUrl(backdropPath))
+        }
+        if let posterPath = movie["poster_path"] as? String {
+            fetchImageAndFadeIn(posterImageView, imageUrl: largePosterUrl(posterPath), smallerImageUrl: smallPosterUrl(posterPath))
         }
         trailerWebView.allowsInlineMediaPlayback = true
         trailerWebView.mediaPlaybackRequiresUserAction = false
@@ -52,18 +66,19 @@ class DetailViewController: UIViewController {
         NetworkHelper.fetchYoutubeLinks(
             String(self.movie["id"]!),
             successHandler: { (links: [String]) -> Void in
+                self.trailerLinks = links
                 if links.count > 0 { // TODO: only play first trailer now
                     let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(links[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
-                    self.trailerWebView.hidden = false
+                    //self.trailerWebView.hidden = false
                     self.trailerWebView.loadHTMLString(code, baseURL: NSBundle.mainBundle().bundleURL)
                 }
                 
             },
             failureHandler: { (error: NSError?) -> Void in }// TODO: add an error handler here
         )
+        
         print(movie)
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

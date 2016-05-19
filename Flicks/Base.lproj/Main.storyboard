@@ -201,7 +201,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K29-5F-tIH">
-                                                <rect key="frame" x="31" y="32" width="44" height="21"/>
+                                                <rect key="frame" x="31" y="27" width="44" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -237,44 +237,24 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Lot-FA-n1j">
-                                        <rect key="frame" x="0.0" y="442" width="320" height="107"/>
+                                    <view contentMode="scaleToFill" id="wMx-cf-f0p">
+                                        <rect key="frame" x="0.0" y="435" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iXv-jt-joM">
-                                            <size key="itemSize" width="71" height="95"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CastProfileCell" id="mPI-QG-gHm" customClass="CastProfileCell" customModule="Flicks" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="71" height="95"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ADC-Vd-NdU">
+                                                <rect key="frame" x="0.0" y="20" width="320" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="71" height="95"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hEQ-y5-U0e">
-                                                            <rect key="frame" x="0.0" y="0.0" width="71" height="80"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T8h-dm-pxe">
-                                                            <rect key="frame" x="2" y="85" width="65" height="6"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="5"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <connections>
-                                                    <outlet property="nameLabel" destination="T8h-dm-pxe" id="1F5-B7-IyE"/>
-                                                    <outlet property="profileImageView" destination="hEQ-y5-U0e" id="BRt-GY-bNy"/>
-                                                </connections>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
+                                            </scrollView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WGW-8Q-4wc">
+                                                <rect key="frame" x="8" y="0.0" width="116" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90404040404040398" green="0.90404040404040398" blue="0.90404040404040398" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -283,12 +263,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="P5q-cS-fg7"/>
                     <connections>
-                        <outlet property="castProfileCollectionView" destination="Lot-FA-n1j" id="4uO-N3-KSB"/>
                         <outlet property="detailsTableView" destination="cTB-pn-SU5" id="S4i-gY-9Hf"/>
                         <outlet property="dropbackImageView" destination="r3x-fA-ogq" id="A89-YI-3bX"/>
                         <outlet property="infoView" destination="xMb-ey-ioZ" id="7le-3E-pfa"/>
                         <outlet property="overviewLabel" destination="IlB-G4-hPm" id="sUw-dJ-6uo"/>
                         <outlet property="posterImageView" destination="byB-vE-6kW" id="3Xf-CH-vPS"/>
+                        <outlet property="profileScrollView" destination="ADC-Vd-NdU" id="VAj-kP-f82"/>
                         <outlet property="scrollView" destination="3zl-kZ-V27" id="pJD-Un-Weg"/>
                         <outlet property="titleLabel" destination="VQq-pY-vQj" id="403-jb-vip"/>
                         <outlet property="trailerWebView" destination="5UK-jL-FJv" id="kry-1r-vZv"/>

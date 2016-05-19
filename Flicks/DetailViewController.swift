@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var dropbackImageView: UIImageView!
     
@@ -30,7 +30,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var detailsTableView: UITableView!
     
-    @IBOutlet weak var castProfileCollectionView: UICollectionView!
+    @IBOutlet weak var profileScrollView: UIScrollView!
     
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
@@ -93,9 +93,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
         
-        castProfileCollectionView.dataSource = self
-        castProfileCollectionView.delegate = self
-        
         NetworkHelper.networkRequest(
             NetworkHelper.urlRequestFromString("http://api.themoviedb.org/3/movie/" + String(movie["id"]!)),
             successHandler: {
@@ -120,7 +117,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                             self.cast.append((name: pdict["name"] as! String, profilePath: pdict["profile_path"] as! String))
                         }
                     }
-                    self.castProfileCollectionView.reloadData()
+                    self.setupProfileViews()
                 }
             },
             failureHandler: {
@@ -136,6 +133,46 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupProfileViews() {
+        var xPos: CGFloat = 0
+        
+        for (name, profilePath) in cast {
+            let profileView = generateSingleProfileView(name, profilePath: profilePath)
+            profileView.frame.origin.x = xPos
+            profileView.frame.origin.y = 0
+            profileScrollView.addSubview(profileView)
+            
+            xPos += profileView.frame.size.width + 5
+        }
+        profileScrollView.contentSize = CGSize(width: xPos, height: 100)
+    }
+    
+    func generateSingleProfileView(name: String, profilePath: String) -> UIView {
+        let profileView = UIView()
+        profileView.frame.size.width = 80
+        profileView.frame.size.height = 100
+        
+        let imageView = UIImageView()
+        imageView.frame.size.width = 60
+        imageView.frame.size.height = 80
+        imageView.frame.origin.x = 0
+        imageView.frame.origin.y = 0
+        fetchImageAndFadeIn(imageView, imageUrl: smallPosterUrl(profilePath))
+        profileView.addSubview(imageView)
+        
+        let nameLabel = UILabel()
+        nameLabel.text = name
+        nameLabel.frame.size.height = 13
+        nameLabel.frame.size.width = 60
+        nameLabel.frame.origin.x = 0
+        nameLabel.frame.origin.y = 85
+        //nameLabel.font = UIFont(name: "systemFont", size: 5)
+        nameLabel.font = UIFont.systemFontOfSize(7)
+        profileView.addSubview(nameLabel)
+        
+        return profileView
     }
     
     func generateMovieDetails(data: NSData) -> Void {
@@ -178,23 +215,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DetailsTableViewCell", forIndexPath: indexPath) as! DetailsTableViewCell
         cell.setContent(details[indexPath.row].0, value: details[indexPath.row].1)
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cast.count
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CastProfileCell", forIndexPath: indexPath) as! CastProfileCell
-        let person = cast[indexPath.row]
-        
-        fetchImageAndFadeIn(cell.profileImageView, imageUrl: largePosterUrl(person.profilePath))
-        cell.nameLabel.text = person.name
         return cell
     }
 

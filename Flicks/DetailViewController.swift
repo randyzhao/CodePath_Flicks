@@ -30,6 +30,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var detailsTableView: UITableView!
     
+    @IBOutlet weak var castProfileImageView: UICollectionView!
+    
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
             let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
@@ -46,8 +48,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
 
         let title = movie["title"] as? String
         titleLabel.text = title
@@ -102,6 +102,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 // TODO: something here
             }
         )
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: detailsTableView.frame.origin.y + detailsTableView.frame.size.height)
         
         print(movie)
     }

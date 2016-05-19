@@ -128,22 +128,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" id="3zl-kZ-V27">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="3zl-kZ-V27">
+                                <rect key="frame" x="0.0" y="67" width="320" height="501"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r3x-fA-ogq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                                        <rect key="frame" x="-8" y="0.0" width="320" height="184"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" mediaPlaybackRequiresUserAction="NO" keyboardDisplayRequiresUserAction="NO" id="5UK-jL-FJv">
-                                        <rect key="frame" x="-15" y="0.0" width="360" height="250"/>
+                                        <rect key="frame" x="-13" y="0.0" width="360" height="184"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                         <dataDetectorType key="dataDetectorTypes"/>
                                     </webView>
                                     <view contentMode="scaleToFill" id="Yc1-Mr-yxp">
-                                        <rect key="frame" x="0.0" y="246" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="185" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VQq-pY-vQj">
@@ -156,7 +156,7 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view alpha="0.80000000000000004" contentMode="scaleToFill" id="xMb-ey-ioZ">
-                                        <rect key="frame" x="0.0" y="296" width="320" height="132"/>
+                                        <rect key="frame" x="0.0" y="236" width="320" height="132"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="byB-vE-6kW">
@@ -186,7 +186,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="EfR-hs-zM6">
-                                        <rect key="frame" x="0.0" y="428" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="376" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" id="s1v-xO-NOr">
@@ -211,7 +211,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="39" sectionHeaderHeight="28" sectionFooterHeight="28" id="cTB-pn-SU5">
-                                        <rect key="frame" x="0.0" y="489" width="320" height="128"/>
+                                        <rect key="frame" x="0.0" y="560" width="320" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -237,6 +237,40 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Lot-FA-n1j">
+                                        <rect key="frame" x="0.0" y="442" width="320" height="107"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iXv-jt-joM">
+                                            <size key="itemSize" width="71" height="95"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="mPI-QG-gHm">
+                                                <rect key="frame" x="0.0" y="0.0" width="71" height="95"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="71" height="95"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hEQ-y5-U0e">
+                                                            <rect key="frame" x="0.0" y="0.0" width="71" height="80"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T8h-dm-pxe">
+                                                            <rect key="frame" x="2" y="85" width="65" height="6"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="5"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90404040404040398" green="0.90404040404040398" blue="0.90404040404040398" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -245,6 +279,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="P5q-cS-fg7"/>
                     <connections>
+                        <outlet property="castProfileImageView" destination="Lot-FA-n1j" id="Ri9-Id-ysq"/>
                         <outlet property="detailsTableView" destination="cTB-pn-SU5" id="S4i-gY-9Hf"/>
                         <outlet property="dropbackImageView" destination="r3x-fA-ogq" id="A89-YI-3bX"/>
                         <outlet property="infoView" destination="xMb-ey-ioZ" id="7le-3E-pfa"/>

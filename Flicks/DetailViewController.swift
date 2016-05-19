@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var dropbackImageView: UIImageView!
     
@@ -30,11 +30,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var detailsTableView: UITableView!
     
-    @IBOutlet weak var castProfileImageView: UICollectionView!
+    @IBOutlet weak var castProfileCollectionView: UICollectionView!
     
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
-            let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
+            let code: String = "<html><body><iframe width=\"320\" height=\"184\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
             self.trailerWebView.hidden = false
             self.trailerWebView.loadHTMLString(code, baseURL: NSBundle.mainBundle().bundleURL)
         }
@@ -45,6 +45,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var trailerLinks: Array<String> = []
     
     var details: Array<(String, String)> = []
+    
+    var cast: Array<(name: String, profilePath: String)> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
         
+        castProfileCollectionView.dataSource = self
+        castProfileCollectionView.delegate = self
+        
         NetworkHelper.networkRequest(
             NetworkHelper.urlRequestFromString("http://api.themoviedb.org/3/movie/" + String(movie["id"]!)),
             successHandler: {
@@ -100,6 +105,26 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             failureHandler: {
                 (error: NSError?) -> Void in
                 // TODO: something here
+            }
+        )
+        
+        NetworkHelper.networkRequest(
+            NetworkHelper.urlRequestFromString("http://api.themoviedb.org/3/movie/" + String(movie["id"]!) + "/credits"),
+            successHandler: { (data: NSData) -> Void in
+                self.cast = []
+                if let rd = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+                    let cast = rd["cast"] as! NSArray
+                    for person in cast {
+                        let pdict = person as! NSDictionary
+                        if pdict["name"] as? String != nil && pdict["profile_path"] as? String != nil {
+                            self.cast.append((name: pdict["name"] as! String, profilePath: pdict["profile_path"] as! String))
+                        }
+                    }
+                    self.castProfileCollectionView.reloadData()
+                }
+            },
+            failureHandler: {
+                (error: NSError?) -> Void in
             }
         )
         
@@ -156,6 +181,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cast.count
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CastProfileCell", forIndexPath: indexPath) as! CastProfileCell
+        let person = cast[indexPath.row]
+        
+        fetchImageAndFadeIn(cell.profileImageView, imageUrl: largePosterUrl(person.profilePath))
+        cell.nameLabel.text = person.name
+        return cell
+    }
+
     /*
     // MARK: - Navigation
 

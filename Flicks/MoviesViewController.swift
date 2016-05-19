@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate{
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     

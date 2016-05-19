@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var dropbackImageView: UIImageView!
     
@@ -28,6 +28,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var voteCountLabel: UILabel!
     
+    @IBOutlet weak var detailsTableView: UITableView!
+    
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
             let code: String = "<html><body><iframe width=\"320\" height=\"320\" src=\(trailerLinks[0]) frameborder=\"0\" allowfullscreen></iframe></body></html>"
@@ -39,6 +41,8 @@ class DetailViewController: UIViewController {
     var movie: NSDictionary!
     
     var trailerLinks: Array<String> = []
+    
+    var details: Array<(String, String)> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +88,21 @@ class DetailViewController: UIViewController {
         voteAverageLabel.text = "\(movie["vote_average"]!)/10"
         voteCountLabel.text = String(movie["vote_count"]! )
         
+        detailsTableView.dataSource = self
+        detailsTableView.delegate = self
+        
+        NetworkHelper.networkRequest(
+            NetworkHelper.urlRequestFromString("http://api.themoviedb.org/3/movie/" + String(movie["id"]!)),
+            successHandler: {
+                (data: NSData) -> Void in
+                self.generateMovieDetails(data)
+            },
+            failureHandler: {
+                (error: NSError?) -> Void in
+                // TODO: something here
+            }
+        )
+        
         print(movie)
     }
     
@@ -92,7 +111,49 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func generateMovieDetails(data: NSData) -> Void {
+        details = []
+        if let rd = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+            if let releaseDate = rd["release_date"] as? String {
+                let outputFormatter = NSDateFormatter()
+                outputFormatter.dateFormat = "MMMM d, yyyy"
+                
+                let inputFormatter = NSDateFormatter()
+                inputFormatter.dateFormat = "yyyy-MM-dd"
+                
+                let dateString = outputFormatter.stringFromDate(inputFormatter.dateFromString(releaseDate)!)
+                details.append(("Release Date", dateString))
+            }
+            
+            if let languageList = rd["spoken_languages"] as? NSArray {
+                var languages: Array<String> = []
+                for language in languageList {
+                    languages.append(language["name"] as! String)
+                }
+                details.append(("Languages", languages.joinWithSeparator(", ")))
+            }
+            
+            if let genreList = rd["genres"] as? NSArray {
+                var genres: Array<String> = []
+                for genre in genreList {
+                    genres.append(genre["name"] as! String)
+                }
+                details.append(("Genres", genres.joinWithSeparator(", ")))
+            }
+        }
+        detailsTableView.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return details.count
+    }
 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("DetailsTableViewCell", forIndexPath: indexPath) as! DetailsTableViewCell
+        cell.setContent(details[indexPath.row].0, value: details[indexPath.row].1)
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 

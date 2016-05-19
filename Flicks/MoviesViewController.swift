@@ -38,6 +38,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refershControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -171,7 +172,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         cell.titleLabel.text = movie["title"] as? String
         return cell
-        
     }
     
 }

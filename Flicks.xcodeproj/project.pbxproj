@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A424048D1CED28AF005B01F7 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A424048C1CED28AF005B01F7 /* PosterCell.swift */; };
+		A424048F1CEE3F36005B01F7 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A424048E1CEE3F36005B01F7 /* DetailsTableViewCell.swift */; };
 		A498ADC01CEA8D9500B33470 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498ADBF1CEA8D9500B33470 /* DetailViewController.swift */; };
 		A498ADC31CEB8BFF00B33470 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498ADC21CEB8BFF00B33470 /* NetworkHelper.swift */; };
 		A498ADC81CEBC9BE00B33470 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498ADC71CEBC9BE00B33470 /* ImageExtension.swift */; };
@@ -25,6 +26,7 @@
 		558626F9FAA9B2745DA3E042 /* Pods-Flicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.release.xcconfig"; sourceTree = "<group>"; };
 		9F6F715205739B91ABDDAEF3 /* Pods-Flicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.debug.xcconfig"; sourceTree = "<group>"; };
 		A424048C1CED28AF005B01F7 /* PosterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		A424048E1CEE3F36005B01F7 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		A498ADBF1CEA8D9500B33470 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A498ADC21CEB8BFF00B33470 /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		A498ADC71CEBC9BE00B33470 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				A424048C1CED28AF005B01F7 /* PosterCell.swift */,
 				A4ED46A01CEA79DD00C0DD95 /* MovieCell.swift */,
+				A424048E1CEE3F36005B01F7 /* DetailsTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				A424048D1CED28AF005B01F7 /* PosterCell.swift in Sources */,
 				A498ADCA1CEBD29A00B33470 /* MovieDBExtension.swift in Sources */,
 				A4ED468C1CEA72A200C0DD95 /* AppDelegate.swift in Sources */,
+				A424048F1CEE3F36005B01F7 /* DetailsTableViewCell.swift in Sources */,
 				A4ED469E1CEA735A00C0DD95 /* MoviesViewController.swift in Sources */,
 				A498ADC81CEBC9BE00B33470 /* ImageExtension.swift in Sources */,
 				A498ADC31CEB8BFF00B33470 /* NetworkHelper.swift in Sources */,

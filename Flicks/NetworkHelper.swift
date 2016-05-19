@@ -18,6 +18,15 @@ class NetworkHelper {
             timeoutInterval: 10)
     }
     
+    class func urlRequestFromString(url: String) -> NSURLRequest {
+        let nsurl = NSURL(string: url + "?api_key=\(API_KEY)&language=\(NSLocale.preferredLanguages()[0])")
+        return NSURLRequest(
+            URL: nsurl!,
+            cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
+            timeoutInterval: 10
+        )
+    }
+    
     class func videosUrl(id: String) -> String {
         return "http://api.themoviedb.org/3/movie/\(id)/videos?api_key=\(API_KEY)&language=\(NSLocale.preferredLanguages()[0])"
     }

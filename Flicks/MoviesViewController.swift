@@ -10,9 +10,13 @@ import UIKit
 import AFNetworking
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var viewTypeSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var movies = [NSDictionary]()
     var filteredMovies = [NSDictionary]()
@@ -25,6 +29,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         networkRequest()
         
@@ -49,6 +56,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             return movie["title"]!.lowercaseString.containsString(searchText.lowercaseString)
         }
         tableView.reloadData()
+        collectionView.reloadData()
     }
     
     func refershControlAction(refreshControl: UIRefreshControl) {
@@ -58,6 +66,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 (movies: [NSDictionary]) -> Void in
                 self.movies = movies
                 self.tableView.reloadData()
+                self.collectionView.reloadData()
                 refreshControl.endRefreshing()
             },
             failureHandler: {
@@ -76,6 +85,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 self.movies = movies
                 EZLoadingActivity.hide()
                 self.tableView.reloadData()
+                self.collectionView.reloadData()
             },
             failureHandler: {
                 (_: NSError?) -> Void in
@@ -113,19 +123,55 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
         
         if let posterPath = movie["poster_path"] as? String {
-            // cell.posterView.setImageWithURL(imageUrl!)
             fetchImageAndFadeIn(cell.posterView, imageUrl: largePosterUrl(posterPath))
         }
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        let movie = moviesToUse()[indexPath!.row]
+        let movie: NSDictionary!
+        if sender is UITableViewCell {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            movie = moviesToUse()[indexPath!.row]
+        } else {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
+            movie = moviesToUse()[indexPath!.row]
+        }
         
         let detailViewController = segue.destinationViewController as! DetailViewController
         detailViewController.movie = movie
     }
 
+    @IBAction func viewTypeChanged(sender: AnyObject) {
+        var fromView: UIView?
+        var toView: UIView?
+        if viewTypeSegmentedControl.selectedSegmentIndex == 1 {
+            fromView = tableView
+            toView = collectionView
+        } else {
+            fromView = collectionView
+            toView = tableView
+        }
+        fromView?.hidden = true
+        toView?.hidden = false
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return moviesToUse().count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PosterCell", forIndexPath: indexPath) as! PosterCell
+        let movie = moviesToUse()[indexPath.row]
+        
+        if let posterPath = movie["poster_path"] as? String {
+            fetchImageAndFadeIn(cell.posterImageVIew, imageUrl: largePosterUrl(posterPath))
+        }
+        cell.titleLabel.text = movie["title"] as? String
+        return cell
+        
+    }
+    
 }

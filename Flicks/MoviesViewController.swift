@@ -18,6 +18,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var errorView: UIView!
+    
+    @IBOutlet var mainView: UIView!
+    
     var movies = [NSDictionary]()
     var filteredMovies = [NSDictionary]()
     var endPoint: String!
@@ -38,12 +42,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refershControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
-        collectionView.insertSubview(refreshControl, atIndex: 0)
+        //collectionView.insertSubview(refreshControl, atIndex: 0)
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
+        
+        mainView.bringSubviewToFront(errorView)
         
     }
     
@@ -61,6 +67,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func refershControlAction(refreshControl: UIRefreshControl) {
+        errorView.hidden = true
         NetworkHelper.fetchMovies(
             NetworkHelper.getRequestByEndpoint(endPoint),
             successHandler: {
@@ -69,9 +76,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 self.tableView.reloadData()
                 self.collectionView.reloadData()
                 refreshControl.endRefreshing()
+                
             },
             failureHandler: {
                 (_: NSError?) -> Void in
+                self.errorView.hidden = false
             }
         )
     }
@@ -87,10 +96,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 EZLoadingActivity.hide()
                 self.tableView.reloadData()
                 self.collectionView.reloadData()
+                
+                self.errorView.hidden = true
             },
             failureHandler: {
                 (_: NSError?) -> Void in
                 EZLoadingActivity.hide(success: false, animated: true)
+                self.errorView.hidden = false
             }
         )
     }
@@ -111,9 +123,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             return movies
         }
     }
-    
-    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell

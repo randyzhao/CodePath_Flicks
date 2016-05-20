@@ -128,11 +128,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="3zl-kZ-V27">
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" maximumZoomScale="3" id="3zl-kZ-V27">
                                 <rect key="frame" x="0.0" y="67" width="320" height="501"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r3x-fA-ogq">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r3x-fA-ogq">
                                         <rect key="frame" x="-8" y="0.0" width="320" height="184"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -258,6 +258,16 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.90404040404040398" green="0.90404040404040398" blue="0.90404040404040398" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" id="PfJ-wh-Sc3">
+                                <rect key="frame" x="0.0" y="67" width="320" height="501"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="vwX-db-HAL">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="501"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -265,6 +275,8 @@
                     <connections>
                         <outlet property="detailsTableView" destination="cTB-pn-SU5" id="S4i-gY-9Hf"/>
                         <outlet property="dropbackImageView" destination="r3x-fA-ogq" id="A89-YI-3bX"/>
+                        <outlet property="fullscreenImageScrollView" destination="PfJ-wh-Sc3" id="TMl-Ji-zyL"/>
+                        <outlet property="fullscreenImageView" destination="vwX-db-HAL" id="b77-Je-azd"/>
                         <outlet property="infoView" destination="xMb-ey-ioZ" id="7le-3E-pfa"/>
                         <outlet property="overviewLabel" destination="IlB-G4-hPm" id="sUw-dJ-6uo"/>
                         <outlet property="posterImageView" destination="byB-vE-6kW" id="3Xf-CH-vPS"/>

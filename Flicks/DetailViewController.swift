@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var dropbackImageView: UIImageView!
     
@@ -31,6 +31,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var detailsTableView: UITableView!
     
     @IBOutlet weak var profileScrollView: UIScrollView!
+    
+    @IBOutlet weak var fullscreenImageView: UIImageView!
+    
+    @IBOutlet weak var fullscreenImageScrollView: UIScrollView!
     
     @IBAction func watchTrailerButtonClicked(sender: AnyObject) {
         if trailerLinks.count > 0 {
@@ -126,13 +130,25 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         )
         
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: detailsTableView.frame.origin.y + detailsTableView.frame.size.height)
+        scrollView.delegate = self
         
+        fullscreenImageScrollView.delegate = self
+        dropbackImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "imageTapped"))
         print(movie)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func imageTapped() {
+        fullscreenImageScrollView.hidden = false
+        fullscreenImageView.image = dropbackImageView.image
+        fullscreenImageScrollView.contentSize = fullscreenImageView.image!.size
+        fullscreenImageView.hidden = false
+        scrollView.hidden = true
     }
     
     func setupProfileViews() {
@@ -218,6 +234,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return fullscreenImageView
+    }
     /*
     // MARK: - Navigation
 

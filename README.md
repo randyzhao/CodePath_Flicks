@@ -1,4 +1,4 @@
-# Pre-work - RandyTip
+# Assignment 1 - Flicks
 
 Flicks is a movie db client for [TMDB](https://www.themoviedb.org/?language=en)
 
